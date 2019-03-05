@@ -1,0 +1,19 @@
+function search_post($post_type) {
+	$search_query = get_search_query();
+	$psts  = get_posts( array('s' => $search_query,'post_type' => $post_type) );
+	
+	if ($psts == true) {
+		if ($post_type == 'hevc') {
+			//...
+			}
+			echo '</table>';
+		} else {
+			foreach( $psts as $pst ){
+				$content = get_post_field('post_content', $pst->ID);
+				$content_parts = get_extended($content);
+				echo get_permalink( $pst->ID ); // Линк на статью
+				echo get_the_title( $pst->ID ); // Титл статьи
+			}
+		}
+	} else { echo 'Не найдено'; }
+}
